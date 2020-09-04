@@ -2724,7 +2724,7 @@ msgid "Wellcome to Gadael"
 msgstr ""
 
 #: public/partials/home.html:12
-msgid "Wellcome to your absence manager"
+msgid "Welcome to your leave management system"
 msgstr ""
 
 #: public/partials/admin/calendar-edit.html:17
