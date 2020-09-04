@@ -1162,7 +1162,7 @@ msgstr "Accès refusé"
 msgid ""
 "You've reached the maximum number of login attempts. Please try again later."
 msgstr ""
-"Vous avez atteins le nombre maximal de tentative de connexion. Veuillez "
+"Vous avez atteint le nombre maximal de tentatives de connexion. Veuillez "
 "réessayer plus tard."
 
 #: rest/Common.js:46
