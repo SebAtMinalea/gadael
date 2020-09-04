@@ -129,6 +129,7 @@ Mail.prototype.send = function() {
             return savedMessage.save();
         })
         .catch(err => {
+            console.error(err);
             savedMessage.error = err;
             return savedMessage.save();
         });
