@@ -1167,7 +1167,7 @@ msgstr ""
 
 #: rest/Common.js:46
 msgid "Logout"
-msgstr "Déconnection"
+msgstr "Déconnexion"
 
 #: rest/Common.js:50
 msgid "Settings"
