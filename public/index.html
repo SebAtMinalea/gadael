@@ -50,7 +50,13 @@
                         &nbsp; <span ng-bind="sessionUser.firstname"></span> <span ng-bind="sessionUser.lastname"></span>
                         <b class="caret"></b>
                     </a>
-				</li>
+        </li>
+        <li class="change-language">
+          <div class="form-group col-xs-12"> 
+            <label for="language" translate>Language</label>
+            <select id="language" ng-model="lang" ng-options="lang for lang in languages" ng-change="changeLanguage()"></select>
+          </div> 
+        </li>
 			</ul>
 
         </div>

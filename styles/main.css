@@ -163,7 +163,10 @@
     border-collapse: separate;
 }
 
-.gadael-department .table th,
+.gadael-department .table th {
+    border:none;
+    vertical-align:bottom;
+}
 .gadael-department .table td {
     border:none;
     vertical-align:middle;
@@ -388,6 +391,28 @@
 }
 
 
+th.first-day-of-month {
+    border-left: solid black 2px !important;
+}
+
+th div div.next-week-month {
+    min-height: 22px;
+}
+
+th div div.next-week-month span {
+    font-weight: bolder;
+    font-size: 16px;
+}
+
+th div div.next-week-day span {
+    font-size: 16px;
+}
+
+th div div.next-week-day-long span {
+    color: gray
+}
+
+
 
 
 /* Sortable items */
@@ -473,4 +498,17 @@ body .line6 * { line-height: 2.4em }
 
 .teleperiod .day rect {
 	fill: #f9f9f9;
+}
+
+.change-language {
+    padding: 14px 15px;
+    color: #777777;
+}
+
+.change-language div {
+    padding-left: unset !important;
+}
+
+.change-language div label {
+    font-weight: unset !important;
 }

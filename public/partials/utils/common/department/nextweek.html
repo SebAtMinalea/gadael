@@ -10,8 +10,18 @@
 
 
             </td>
-            <th style="width:7ex" class="text-center vgradiant" ng-repeat="col in department.days.collaborators[0].days" ng-class="{'hidden-xs': $index>7 }">
-                <span data-title="{{col.date|date:'fullDate'}}" bs-tooltip>{{col.date|date:'d'}}</span>
+            <th style="width:8ex; height: 8ex;" class="text-center" ng-repeat="col in department.days.collaborators[0].days" ng-class="{'hidden-xs': $index>7, 'first-day-of-month': col.date.getDate() == 1 }">
+                <div data-title="{{col.date|date:'fullDate'}}" bs-tooltip class='next-week-date'>
+                    <div class='next-week-month'>
+                        <span  ng-if="col.date.getDate() == 1 || col.date.getDate() == 15">{{col.date.toLocaleString(lang, { month: 'short' })}}</span>
+                    </div>
+                    <div class='next-week-day-long'>
+                        <span>{{col.date.toLocaleDateString(lang, { weekday: 'short' })}}</span>
+                    </div>
+                    <div class='next-week-day'>
+                        <span >{{col.date|date:'d'}}</span>
+                    </div>
+                </div>
             </th>
         </tr>
     </thead>

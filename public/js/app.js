@@ -57,10 +57,12 @@ define([
     gadael.config(["$httpProvider", jsondates]);
 
 
-	gadael.run(['$rootScope', '$location', '$http', '$q', 'gettext', 'gettextCatalog',
-                function($rootScope, $location, $http, $q, gettext, gettextCatalog) {
+	gadael.run(['$rootScope', '$location', '$http', '$q', 'gettext', 'gettextCatalog', '$window',
+                function($rootScope, $location, $http, $q, gettext, gettextCatalog, $window) {
 
-        $rootScope.baseUrl = document.location.href.split('#')[0];
+		$rootScope.baseUrl = document.location.href.split('#')[0];
+		$rootScope.languages = ['en', 'fr', 'es'];
+		$rootScope.lang = 'en';
 
         $rootScope.setPageTitle = function(title) {
             $rootScope.pageTitle = gettextCatalog.getString('Gadael - %s').replace(/%s/, gettextCatalog.getString(title));
@@ -99,7 +101,11 @@ define([
                         $rootScope[prop] = response[prop];
                     }
 				}
-				gettextCatalog.setCurrentLanguage(response.lang);
+				$rootScope.lang = response.lang;
+				if($window.localStorage.getItem('lang')) {
+					$rootScope.lang = $window.localStorage.getItem('lang');
+				}
+        		gettextCatalog.setCurrentLanguage($rootScope.lang);			
 
 				$rootScope.sessionUser.intAuthenticated = response.sessionUser.isAuthenticated ? 1 : 0;
 
@@ -125,6 +131,11 @@ define([
 		$rootScope.closeAlert = function(index) {
 			$rootScope.pageAlerts.splice(index, 1);
 		};
+
+		$rootScope.changeLanguage = function() {
+			gettextCatalog.setCurrentLanguage($rootScope.lang);
+			$window.localStorage.setItem('lang', $rootScope.lang);
+		}
 
 
 		$rootScope.$on('$routeChangeStart', function() {
