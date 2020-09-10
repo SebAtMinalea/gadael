@@ -38,12 +38,12 @@
 
         <div class="col-md-3 form-group">
             <label for="beneficiary_from{{$index}}" translate>From</label>
-            <input type="text" id="beneficiary_from{{$index}}" class="form-control" ng-model="accountRight.from" data-autoclose="1" container="body" bs-datepicker />
+            <input type="text" id="beneficiary_from{{$index}}" class="form-control" ng-model="accountRight.from" data-autoclose="1" container="body" bs-datepicker data-date-format="dd/MM/yyyy" data-start-week="1"/>
         </div>
 
         <div class="col-md-3 form-group">
             <label for="beneficiary_to{{$index}}" translate>To</label>
-            <input type="text" id="beneficiary_to{{$index}}" class="form-control" ng-model="accountRight.to" data-autoclose="1" container="body" bs-datepicker />
+            <input type="text" id="beneficiary_to{{$index}}" class="form-control" ng-model="accountRight.to" data-autoclose="1" container="body" bs-datepicker data-date-format="dd/MM/yyyy" data-start-week="1"/>
         </div>
     </div>
 

@@ -33,12 +33,12 @@
 
         <div class="col-md-3 form-group">
             <label for="user_from" translate>From</label>
-            <input type="text" id="user_from" class="form-control" ng-model="accountNWDaysCalendar.from" data-max-date="{{accountNWDaysCalendar.to}}" data-autoclose="1" container="body" ng-required bs-datepicker />
+            <input type="text" id="user_from" class="form-control" ng-model="accountNWDaysCalendar.from" data-max-date="{{accountNWDaysCalendar.to}}" data-autoclose="1" container="body" ng-required bs-datepicker data-date-format="dd/MM/yyyy" data-start-week="1"/>
         </div>
 
         <div class="col-md-3 form-group">
             <label for="user_to" translate>To</label>
-            <input type="text" id="user_to" class="form-control" ng-model="accountNWDaysCalendar.to" data-min-date="{{accountNWDaysCalendar.from}}" data-autoclose="1" container="body" bs-datepicker />
+            <input type="text" id="user_to" class="form-control" ng-model="accountNWDaysCalendar.to" data-min-date="{{accountNWDaysCalendar.from}}" data-autoclose="1" container="body" bs-datepicker data-date-format="dd/MM/yyyy" data-start-week="1"/>
         </div>
     </div>
 

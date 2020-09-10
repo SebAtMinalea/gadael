@@ -31,7 +31,7 @@
                   <li><a ng-click="overtime.mode='duration'"><span translate>Set hours</span></a></li>
                 </ul>
               </div>
-            <input type="text" id="day" class="form-control" ng-model="overtime.day" data-autoclose="1" container="body" ng-change="setDuration(overtime)" ng-readonly="overtime.mode=='duration'" ng-required bs-datepicker />
+            <input type="text" id="day" class="form-control" ng-model="overtime.day" data-autoclose="1" container="body" ng-change="setDuration(overtime)" ng-readonly="overtime.mode=='duration'" ng-required bs-datepicker data-date-format="dd/MM/yyyy" data-start-week="1"/>
             </div>
         </div>
 
