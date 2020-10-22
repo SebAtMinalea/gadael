@@ -101,11 +101,19 @@ define([], function() {
              * Load collection
              * The collection available on the selected period
              */
+
             $scope.collection = accountCollection.get({
                 user: $scope.sessionUser.id,
                 dtstart: $scope.selection.begin,
                 dtend: $scope.selection.end
             });
+
+            if($scope.selection.periods == undefined) {
+                $scope.selection.periods = AbsenceEdit.splitSelectionToDailyPeriods({
+                    dtstart: $scope.selection.begin,
+                    dtend: $scope.selection.end
+                });
+            }
 
             var serviceAction = AbsenceEdit.getNextButtonJob($scope, requestUser, accountRights);
 

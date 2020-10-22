@@ -34351,8 +34351,6 @@ define('services/absence-edit',['angular', 'services/request-edit'], function(an
             }
         }
 
-
-
         /**
          * Create distribution to post for a absence request
          * @param {object} renewals   Rights renenwals distribution with renewal id as property, right id and quantity (the form input) in the value
@@ -34461,13 +34459,13 @@ define('services/absence-edit',['angular', 'services/request-edit'], function(an
                     throw new Error(gettextCatalog.getString('Wrong events count'));
                 }
 
-                if (matchQuantity && (0 !== secQuantity)) {
+                /*if (matchQuantity && (0 !== secQuantity)) {
                     throw new Error(
                         gettextCatalog.getString('Duration mismatch: {duration} hours remain unconsumed after the creation of {nbEvents} events, please check your absence period, it must not overlap another leave')
                         .replace(/\{duration\}/, secQuantity /3600)
                         .replace(/\{nbEvents\}/,events.length)
                     );
-                }
+                }*/
 
                 return events;
             }
@@ -34733,7 +34731,67 @@ define('services/absence-edit',['angular', 'services/request-edit'], function(an
         }
 
 
+/**
+         * Split selection to daily periods
+         * @param {object} selection
+         * @return {Array}
+         */
+        function splitSelectionToDailyPeriods(selection) {
 
+            var sameYear = (selection.dtstart.getFullYear() === selection.dtend.getFullYear());
+            var sameMonth = (selection.dtstart.getMonth() === selection.dtend.getMonth());
+            var sameDate = (selection.dtstart.getDate() === selection.dtend.getDate());
+
+            if (sameYear && sameMonth && sameDate) {
+                return [selection];
+            }
+
+            var loopDate = new Date(selection.dtstart);
+            loopDate.setHours(0, 0, 0, 0);
+
+            var workingDays = [];
+            var dayPeriod;
+
+            while(loopDate < selection.dtend) {
+
+                if (loopDate < selection.dtstart) {
+                    dayPeriod = {
+                        dtstart: selection.dtstart
+                    };
+                } else {
+                    dayPeriod = {
+                        dtstart: new Date(loopDate)
+                    };
+                    dayPeriod.dtstart.setHours(0, (8 * 60), 0);
+                }
+
+                loopDate.setDate(loopDate.getDate()+1);
+                if (dayPeriod.dtstart >= selection.dtend) {
+                    break;
+                }
+
+                if (loopDate > selection.dtend) {
+                    dayPeriod.dtend = selection.dtend;
+                } else {
+                    dayPeriod.dtend = new Date(selection.dtstart);
+                    dayPeriod.dtend.setHours(0, (17 * 60), 0);
+
+                    if (dayPeriod.dtend < dayPeriod.dtstart) {
+                        dayPeriod.dtend = new Date(
+                            dayPeriod.dtstart.getFullYear(),
+                            dayPeriod.dtstart.getMonth(),
+                            dayPeriod.dtstart.getDate(),
+                            dayPeriod.dtend.getHours(),
+                            dayPeriod.dtend.getMinutes(),
+                            dayPeriod.dtend.getSeconds()
+                        );
+                    }
+                }
+
+                workingDays.push(dayPeriod);
+            }
+            return workingDays;
+        };
 
         /**
          * The next button, from the period selection to the right distribution interface
@@ -34960,6 +35018,7 @@ define('services/absence-edit',['angular', 'services/request-edit'], function(an
             createDistribution: createDistribution,
             cleanDocument: cleanDocument,
             getNextButtonJob: getNextButtonJob,
+            splitSelectionToDailyPeriods: splitSelectionToDailyPeriods,
             onceUserLoaded: onceUserLoaded,
             getLoadWorkingTimes: getLoadWorkingTimes
         };
